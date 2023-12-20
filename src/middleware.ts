@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   // This NextRequest has a property that tells us on what path you are
   const path = request.nextUrl.pathname
-  const isPublicPath = path === '/login' || path === '/signup'
+  const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail'
   // These are public paths and should not be visible to someone who has token!
   const token = request.cookies.get('token')?.value || '' // that 'token' can be there/not (expired or deleted by user)
 
@@ -23,6 +23,7 @@ export const config = {
     '/',
     '/profile',
     '/login',
-    '/signup'
+    '/signup',
+    '/verifyemail'
   ],
 }
