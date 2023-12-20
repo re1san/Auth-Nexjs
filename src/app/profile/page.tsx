@@ -4,13 +4,14 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Code2, Info } from 'lucide-react';
 
 export default function ProfilePage() {
 
   const router = useRouter();
 
-  const [data, setData] = useState("Nothing to show"); // data will contain ID
+  const [data, setData] = useState(""); // data will contain ID
+  //const [toggle, setToggle] = useState(false); // toggle is to show the ID/not
 
   const logout = async () => {
     try {
@@ -44,13 +45,25 @@ export default function ProfilePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent rounded-sm"></div>
         <div className="absolute bottom-4 left-4 text-left">
-          <h1 className="text-lg font-semibold text-white">Delba</h1>
+          <div className="flex">
+            <h1 className="text-lg font-semibold text-white">Delba</h1>
+            {data == "" 
+            ? 
+            <button 
+            onClick={getUserDetails}
+            className="ml-2 cursor-pointer text-xs font-semibold text-gray-300"><Code2 size={14}/></button> 
+            : 
+            <div className="flex">
+              <Link className="ml-2 mt-2 text-xs font-semibold text-gray-300 hover:underline" href={`/profile/${data}`}> {data} </Link> 
+              <ArrowUpRight className="ml-1 mt-2 text-gray-300" size={14}/> 
+            </div>}
+          </div>
           <p className="mt-2 text-sm text-gray-300">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, debitis?
           </p>
           <button 
           onClick={logout}
-          className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
+          className="hover:underline mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
             <ArrowLeft className="mr-1" size={14} /> Logout
           </button>
         </div>
